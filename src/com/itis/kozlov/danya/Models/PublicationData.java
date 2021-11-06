@@ -1,4 +1,4 @@
-package com.itis.kozlov.danya.classes;
+package com.itis.kozlov.danya.Models;
 
 import lombok.*;
 
@@ -23,7 +23,7 @@ public class PublicationData {
         this.enAnnotation = "For happiness and balance in life";
         this.keyWords = "Любовь, математика, голуби";
         this.notInSystemAuthors = "Автор1, Автор2";
-        this.file = "C:\\Users\\Danya\\Desktop\\commands.txt";
+        this.file = "text.txt";
         this.doi = "http://doi.com/";
     }
 }

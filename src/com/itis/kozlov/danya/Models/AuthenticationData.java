@@ -1,4 +1,4 @@
-package com.itis.kozlov.danya.classes;
+package com.itis.kozlov.danya.Models;
 
 public class AuthenticationData {
     private String username;
