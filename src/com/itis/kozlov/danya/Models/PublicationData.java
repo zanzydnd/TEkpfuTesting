@@ -26,4 +26,14 @@ public class PublicationData {
         this.file = "text.txt";
         this.doi = "http://doi.com/";
     }
+
+    public PublicationData(String name, String rusAnnotation, String enAnnotation, String keyWords, String notInSystemAuthors, String file,String doi){
+        this.name = name;
+        this.rusAnnotation = rusAnnotation;
+        this.enAnnotation = enAnnotation;
+        this.keyWords = keyWords;
+        this.notInSystemAuthors = notInSystemAuthors;
+        this.file = file;
+        this.doi = doi;
+    }
 }
