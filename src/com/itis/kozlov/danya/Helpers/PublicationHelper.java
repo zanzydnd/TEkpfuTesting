@@ -13,7 +13,7 @@ public class PublicationHelper extends HelperBase {
 
     }
 
-    public void createPublication(PublicationData data){
+    public void createPublication(PublicationData data) {
 
         this.applicationManager.getNavigation().goToPublicationCreationUrl();
         driver.findElement(By.id("topic")).click();
@@ -52,30 +52,65 @@ public class PublicationHelper extends HelperBase {
     }
 
 
-    public PublicationData getPublicationData(){
-        openLastPublicationLink();
+    public PublicationData getPublicationData() {
 
         PublicationData data = new PublicationData();
 
         data.setName(driver.findElement(By.xpath("/html/body/div/section[1]/div/div/h2")).getText());
         data.setDoi(driver.findElement(By.xpath("/html/body/div/section[1]/div/div/div[2]/div/a")).getText());
-        //data.setFile(driver.findElement(By.id("file")).getText());
         data.setEnAnnotation(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[2]/p")).getText());
         data.setRusAnnotation(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[1]/p")).getText());
         data.setKeyWords(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[3]/p")).getText());
-        //data.setNotInSystemAuthors(driver.findElement(By.xpath("authors")).getText());
 
         return data;
     }
 
-    public String selectLastCreatedPublication(){
+    public String selectLastCreatedPublication() {
         String lastPublicationXPATH = "/html/body/div/form/div/div/div/div[1]/a[1]";
         System.out.println(driver.findElement(By.xpath(lastPublicationXPATH)).getAttribute("href"));
         return driver.findElement(By.xpath(lastPublicationXPATH)).getAttribute("href");
     }
 
-    public void openLastPublicationLink(){
+    public void openLastPublicationLink() {
         applicationManager.getNavigation().goToPage(this.selectLastCreatedPublication());
+    }
+
+
+    public void openEditPage() {
+        applicationManager.getNavigation().goToPage(driver.findElement(
+                By.xpath("/html/body/div/section[1]/div/div/div[4]/div[1]/a[2]")).getAttribute("href")
+        );
+    }
+
+    public void editData(PublicationData data) {
+        openEditPage();
+
+        driver.findElement(By.id("topic")).click();
+        driver.findElement(By.id("topic")).clear();
+        driver.findElement(By.id("topic")).sendKeys(data.getName());
+
+
+        driver.findElement(By.id("annotation_rus")).click();
+        driver.findElement(By.id("annotation_rus")).clear();
+        driver.findElement(By.id("annotation_rus")).sendKeys(data.getRusAnnotation());
+
+        driver.findElement(By.id("annotation_en")).click();
+        driver.findElement(By.id("annotation_en")).clear();
+        driver.findElement(By.id("annotation_en")).sendKeys(data.getEnAnnotation());
+
+        driver.findElement(By.id("words")).click();
+        driver.findElement(By.id("words")).clear();
+        driver.findElement(By.id("words")).sendKeys(data.getKeyWords());
+
+        driver.findElement(By.id("authors")).click();
+        driver.findElement(By.id("authors")).clear();
+        driver.findElement(By.id("authors")).sendKeys(data.getNotInSystemAuthors());
+
+        driver.findElement(By.id("doi")).click();
+        driver.findElement(By.id("doi")).clear();
+        driver.findElement(By.id("doi")).sendKeys(data.getDoi());
+
+        driver.findElement(By.id("btn_submit")).click();
     }
 
 }

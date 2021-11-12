@@ -9,10 +9,6 @@ public class AuthenticationData {
         this.username = username;
     }
 
-    public AuthenticationData(){
-        this.username = "zanzydnd@gmail.com";
-        this.password = "ifiruled1";
-    }
 
     public String getUsername(){
         return this.username;

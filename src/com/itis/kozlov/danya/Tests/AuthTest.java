@@ -7,6 +7,6 @@ import org.junit.*;
 public class AuthTest extends TestBase {
     @Test
     public void test() throws Exception {
-        this.app.getAuth().login(new AuthenticationData());
+        this.app.getAuth().login(new AuthenticationData("imtester@mail.com", "test123test"));
     }
 }
