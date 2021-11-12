@@ -3,6 +3,7 @@ package com.itis.kozlov.danya.Helpers;
 import com.itis.kozlov.danya.ApplicationManager;
 import com.itis.kozlov.danya.Models.PublicationData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class PublicationHelper extends HelperBase {
@@ -48,6 +49,33 @@ public class PublicationHelper extends HelperBase {
 
 
         driver.findElement(By.id("btn_submit")).click();
+    }
+
+
+    public PublicationData getPublicationData(){
+        openLastPublicationLink();
+
+        PublicationData data = new PublicationData();
+
+        data.setName(driver.findElement(By.xpath("/html/body/div/section[1]/div/div/h2")).getText());
+        data.setDoi(driver.findElement(By.xpath("/html/body/div/section[1]/div/div/div[2]/div/a")).getText());
+        //data.setFile(driver.findElement(By.id("file")).getText());
+        data.setEnAnnotation(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[2]/p")).getText());
+        data.setRusAnnotation(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[1]/p")).getText());
+        data.setKeyWords(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[3]/p")).getText());
+        //data.setNotInSystemAuthors(driver.findElement(By.xpath("authors")).getText());
+
+        return data;
+    }
+
+    public String selectLastCreatedPublication(){
+        String lastPublicationXPATH = "/html/body/div/form/div/div/div/div[1]/a[1]";
+        System.out.println(driver.findElement(By.xpath(lastPublicationXPATH)).getAttribute("href"));
+        return driver.findElement(By.xpath(lastPublicationXPATH)).getAttribute("href");
+    }
+
+    public void openLastPublicationLink(){
+        applicationManager.getNavigation().goToPage(this.selectLastCreatedPublication());
     }
 
 }

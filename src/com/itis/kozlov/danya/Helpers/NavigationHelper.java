@@ -22,4 +22,12 @@ public class NavigationHelper extends HelperBase {
     public void goToPublicationCreationUrl(){
         driver.get(baseUrl + "publications/create/");
     }
+
+    public void goToPage(String pageHref){
+        driver.get(pageHref);
+    }
+
+    public void goToUserPage(){
+        driver.get(baseUrl + "cabinet/");
+    }
 }

@@ -22,9 +22,9 @@ public class ApplicationManager {
     private NavigationHelper navigation;
     private LoginHelper auth;
     private PublicationHelper publication;
+    private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-
-    public ApplicationManager(){
+    private ApplicationManager(){
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
         baseUrl = "https://te.kpfu.ru/";
@@ -38,5 +38,18 @@ public class ApplicationManager {
 
     public void stop(){
         driver.quit();
+    }
+
+    public static ApplicationManager getInstance(){
+        if(app.get() == null){
+            ApplicationManager newInstance = new ApplicationManager();
+            newInstance.getNavigation().goToBaseURL();
+            app.set(newInstance);
+        }
+        return app.get();
+    }
+
+    protected void finalize() throws Throwable{
+            driver.quit();
     }
 }

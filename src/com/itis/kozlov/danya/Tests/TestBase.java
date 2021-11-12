@@ -10,12 +10,7 @@ public class TestBase {
 
     @Before
     public void setUp() throws Exception {
-        this.app = new ApplicationManager();
+        this.app = ApplicationManager.getInstance();
     }
 
-
-    @After
-    public void tearDown() throws Exception{
-        this.app.stop();
-    }
 }
