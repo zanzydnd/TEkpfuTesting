@@ -1,12 +1,20 @@
 package com.itis.kozlov.danya.Models;
 
+import com.github.javafaker.Faker;
+import com.github.javafaker.service.FakeValuesService;
+import com.github.javafaker.service.RandomService;
 import lombok.*;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Locale;
 
 @Data
 @Builder
 @AllArgsConstructor
-@Getter
-@Setter
+/*@Getter
+@Setter*/
+@XmlRootElement
 public class PublicationData {
     private String name;
     private String rusAnnotation;
@@ -35,5 +43,23 @@ public class PublicationData {
         this.notInSystemAuthors = notInSystemAuthors;
         this.file = file;
         this.doi = doi;
+    }
+
+
+    public static PublicationData getInstance(){
+        FakeValuesService fakeValuesService = new FakeValuesService(
+                new Locale("en-GB"), new RandomService());
+
+        Faker faker = new Faker();
+
+        String doi = "https://" + faker.company().url();
+        String name = faker.funnyName().name();
+        String rusAnnot = faker.howIMetYourMother().quote();
+        String enAnnot = faker.friends().quote();
+        String authors = faker.howIMetYourMother().character() + ", " + faker.friends().character();
+        String keyWords = faker.animal().name()+ ", " + faker.ancient().hero();
+        String file = "text.pdf";
+
+        return new PublicationData(name,rusAnnot,enAnnot,keyWords,authors,file,doi);
     }
 }

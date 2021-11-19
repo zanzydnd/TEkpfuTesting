@@ -1,7 +1,7 @@
 .idea/
 TEkpfuTesting.iml
 out/
-libs/
+libs
 text.txt
 chromedriver
 chromedriver.exe
