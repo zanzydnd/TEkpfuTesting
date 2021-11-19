@@ -27,7 +27,7 @@ public class ApplicationManager {
     private ApplicationManager(){
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        baseUrl = "https://te.kpfu.ru/";
+        baseUrl = "http://te.a.uenv.ru/";
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         js = (JavascriptExecutor) driver;
 
