@@ -5,6 +5,8 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import lombok.*;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Locale;
@@ -15,6 +17,7 @@ import java.util.Locale;
 /*@Getter
 @Setter*/
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PublicationData {
     private String name;
     private String rusAnnotation;

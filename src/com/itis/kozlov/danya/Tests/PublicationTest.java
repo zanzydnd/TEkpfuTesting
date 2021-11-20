@@ -28,20 +28,18 @@ public class PublicationTest extends TestBase {
 
     @Parameterized.Parameters
     public static Iterable<PublicationData> groupDataFromXml() throws IOException, JAXBException {
-        JAXBContext contextObj = JAXBContext.newInstance(PublicationData.class);
+      /*  JAXBContext contextObj = JAXBContext.newInstance(PublicationData.class);
         Unmarshaller unmarshaller = contextObj.createUnmarshaller();
         return Collections.singletonList((PublicationData) unmarshaller.unmarshal(new File("/Users/dane4kq/IdeaProjects/TEkpfuTesting/first_try.xml")));
+    */
+        ObjectMapper mapper = new ObjectMapper();
+        PublicationData[] list = mapper.readValue(new File("/Users/dane4kq/IdeaProjects/TEkpfuTesting/first_try.json"),PublicationData[].class);
+        return Arrays.asList(list);
     }
 
 
     @Test
     public void testCreation() throws Exception {
-        //this.app.getAuth().login(new AuthenticationData("imtester@mail.com", "test123test"));
-        /*PublicationData data = new PublicationData("Тестирование",
-                "Для полного счастья и гармонии в душе", "For happiness and balance in life",
-                "Любовь, математика, голуби", "Автор1, Автор2", "text.pdf",
-                "http://doi.com/")*/
-        ;
         this.app.getPublication().createPublication(publicationData);
 
         this.app.getPublication().openLastPublicationLink();
