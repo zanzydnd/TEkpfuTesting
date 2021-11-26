@@ -3,10 +3,12 @@ package com.itis.kozlov.danya;
 import com.itis.kozlov.danya.Helpers.LoginHelper;
 import com.itis.kozlov.danya.Helpers.NavigationHelper;
 import com.itis.kozlov.danya.Helpers.PublicationHelper;
+import static com.itis.kozlov.danya.SettingsWrapper.Settings;
 import lombok.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Data
@@ -24,11 +26,12 @@ public class ApplicationManager {
     private PublicationHelper publication;
     private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-    private ApplicationManager(){
+    private ApplicationManager() throws Exception {
+        Settings.init();
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        baseUrl = "http://te.a.uenv.ru/";
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        baseUrl = Settings.baseURL;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         js = (JavascriptExecutor) driver;
 
         navigation = new NavigationHelper(this, this.baseUrl);
@@ -40,10 +43,9 @@ public class ApplicationManager {
         driver.quit();
     }
 
-    public static ApplicationManager getInstance(){
+    public static ApplicationManager getInstance() throws Exception {
         if(app.get() == null){
             ApplicationManager newInstance = new ApplicationManager();
-            newInstance.getNavigation().goToBaseURL();
             app.set(newInstance);
         }
         return app.get();

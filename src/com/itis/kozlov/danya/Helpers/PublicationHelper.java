@@ -54,18 +54,24 @@ public class PublicationHelper extends HelperBase {
 
     public PublicationData getPublicationData() {
 
+        System.out.println("hiiiiiiii");
         PublicationData data = new PublicationData();
 
         data.setName(driver.findElement(By.xpath("/html/body/div/section[1]/div/div/h2")).getText());
+        System.out.println(1);
         data.setDoi(driver.findElement(By.xpath("/html/body/div/section[1]/div/div/div[2]/div/a")).getText());
+        System.out.println(2);
         data.setEnAnnotation(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[2]/p")).getText());
+        System.out.println(3);
         data.setRusAnnotation(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[1]/p")).getText());
+        System.out.println(4);
         data.setKeyWords(driver.findElement(By.xpath("/html/body/div/section[2]/div/div/div[1]/div[3]/p")).getText());
-
+        System.out.println(5);
         return data;
     }
 
     public String selectLastCreatedPublication() {
+        this.applicationManager.getNavigation().goToPublicationsPage();
         String lastPublicationXPATH = "/html/body/div/form/div/div/div/div[1]/a[1]";
         System.out.println(driver.findElement(By.xpath(lastPublicationXPATH)).getAttribute("href"));
         return driver.findElement(By.xpath(lastPublicationXPATH)).getAttribute("href");
@@ -77,12 +83,19 @@ public class PublicationHelper extends HelperBase {
 
 
     public void openEditPage() {
+        openLastPublicationLink();
+        System.out.println(driver.findElement(
+                By.xpath("/html/body/div/section[1]/div/div/div[4]/div[1]/a[2]")).getAttribute("href")
+        );
         applicationManager.getNavigation().goToPage(driver.findElement(
                 By.xpath("/html/body/div/section[1]/div/div/div[4]/div[1]/a[2]")).getAttribute("href")
         );
+        System.out.println("im busted");
     }
 
     public void editData(PublicationData data) {
+        this.applicationManager.getNavigation().goToPublicationsPage();
+        System.out.println(123123);
         openEditPage();
 
         driver.findElement(By.id("topic")).click();

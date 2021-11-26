@@ -6,28 +6,39 @@ public class NavigationHelper extends HelperBase {
 
     protected String baseUrl;
 
-    public NavigationHelper(ApplicationManager applicationManager, String baseUrl){
+    public NavigationHelper(ApplicationManager applicationManager, String baseUrl) {
         super(applicationManager);
         this.baseUrl = baseUrl;
     }
 
-    public void goToBaseURL(){
+    public void goToBaseURL() {
         driver.get(baseUrl);
     }
 
-    public void goToLoginUrl(){
+    public void goToPublicationsPage(){
+        driver.get(baseUrl + "publications/");
+    }
+    public void goToLoginUrl() {
         driver.get(baseUrl + "login/");
     }
 
-    public void goToPublicationCreationUrl(){
+    public void goToPublicationCreationUrl() {
         driver.get(baseUrl + "publications/create/");
     }
 
-    public void goToPage(String pageHref){
+    public void goToPage(String pageHref) {
         driver.get(pageHref);
     }
 
-    public void goToUserPage(){
+    public void goToLogout() {
+        driver.get(baseUrl + "logout");
+    }
+
+    public void goToCabinet() {
+        driver.get(baseUrl + "cabinet");
+    }
+
+    public void goToUserPage() {
         driver.get(baseUrl + "cabinet/");
     }
 }

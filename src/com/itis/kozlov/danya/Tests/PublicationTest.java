@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(Parameterized.class)
-public class PublicationTest extends TestBase {
+public class PublicationTest extends AuthBase {
     private PublicationData publicationData;
 
     public PublicationTest(PublicationData data) {
@@ -64,8 +64,9 @@ public class PublicationTest extends TestBase {
         data.setEnAnnotation("All changed");
         data.setNotInSystemAuthors("Автор1, Автор2, все поменялось");
 
-
+        System.out.println("hey brother");
         app.getPublication().editData(data);
+        System.out.println("lol");
         PublicationData newData = app.getPublication().getPublicationData();
 
 
